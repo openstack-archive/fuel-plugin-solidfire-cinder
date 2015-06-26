@@ -1,0 +1,72 @@
+attributes:
+  multibackend:
+    value: false
+    label: 'Multibackend enabled'
+    description: 'SolidFire will be used in a Multibackend env (not implemented by Fuel).'
+    weight: 40
+    type: "checkbox"
+  solidifire_admin_login:
+    value: ''
+    label: 'Login for Cluster Admin account (san_login)'
+    description: 'Cluster account used by Cinder service.'
+    weight: 10
+    type: "text"
+    regex:
+      source: '\S'
+      error: "Username field cannot be empty"
+  solidfire_admin_password:
+    value: ''
+    label: 'Password for Cluster Admin account (san_password)'
+    description: 'Cluster account used by Cinder service.'
+    weight: 20
+    type: "password"
+  solidfire_mvip:
+    value: ''
+    label: 'Cluster MVIP (san_ip)'
+    description: 'The hostname (or IP address) for the SolidFire Cluster API endpoint.'
+    weight: 30
+    type: "text"
+  solidfire_api_port:
+    value: '443'
+    label: 'Cluster enpoint port'
+    description: 'The TCP port to use for API communication with the cluster or proxy server.'
+    weight: 50
+    type: "text"
+  solidfire_emulate_512:
+    value: "true"
+    values:
+        - data: "true"
+          label: "true"
+          description: "Enables 512 byte emulation on volumes during creation."
+        - data: "false"
+          label: "false"
+          description: "Disables 512 byte emulation and uses the native 4096 byte block size."
+    label: "SolidFire Emulate 512 block size"
+    description: 'Enable/Disable 512 byte block size emulation (typically left enabled).'
+    weight: 60
+    type: "radio"
+  solidfire_enable_image_caching:
+    value: "true"
+    values:
+        - data: "true"
+          label: "true"
+          description: "Enables caching of glance images on the SolidFire cluster."
+        - data: "false"
+          label: "false"
+          description: "Disables caching of glance images on the SolidFire cluster."
+    label: "SolidFire enable image caching"
+    description: 'Enable/Disable caching of Glance images on the SolidFire cluster.'
+    weight: 70
+    type: "radio"
+  solidfire_image_cache_account:
+    value: 'openstack-vtemplate'
+    label: 'Image Cache account name'
+    description: 'The SolidFire tenant that will own cached image volumes on the Cluster.'
+    weight: 70
+    type: "text"
+  solidfire_account_prefix:
+    value: ''
+    label: 'Account Prefix for this OpenStack'
+    description: 'Pre-pend this name to all accounts on the SolidFire Array.'
+    weight: 80
+    type: "text"
