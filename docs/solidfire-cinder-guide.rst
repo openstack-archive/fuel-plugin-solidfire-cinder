@@ -23,7 +23,7 @@ SolidFire accounts
     project. No configuration is needed for these accounts.
 
 SolidFire Cinder
-=============
+================
 
 The SolidFire Cinder Fuel plugin provides an automated method
 to insert the necessary lines into the cinder.conf file. The plugin
@@ -53,45 +53,68 @@ Fuel                         6.1
 Limitations
 -----------
 
-Fuel does not support multiple storage backends in Cinder, therefore
-the SolidFire Cinder Fuel plugin also does not support multiple backends.
-The SolidFire Cinder Fuel plugin does however provide the ability to
-create a configuarion file stanza such that when multi-backend support
-is added to fuel the stanza is correct.
+* Fuel does not support multiple storage backends in Cinder,
+  therefore the SolidFire Cinder Fuel plugin also does not support multiple backends.
+
+* The SolidFire Cinder Fuel plugin does however provide the ability to
+  create a configuarion file stanza such that when multi-backend support
+  is added to Fuel the stanza is correct.
 
 Installation Guide
 ==================
 
-Provide step-by-step instructions for plugin installation.
-If plugin requires pre-installation steps like backend configuration,
-you should also add this information here.
 
-SolidFire Cinder Plugin installation
---------------------------
+SolidFire Cinder plugin installation
+------------------------------------
 
-1. Download the plugin from Fuel Plugins Catalog.
-2. Copy the plugin on already installed Fuel Master node. If you do not
-   have the Fuel Master node yet, see Quick Start Guide:
-     scp  fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm root@:<the_Fuel_Master_node_IP>:/tmp
-3. Log into the Fuel Master node.
-4. Install the plugin:
-     cd /tmp
-     fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm
-4. After plugin is installed, create a new OpenStack environment.
-5. Configure your environment.
-6. Open the Settings tab of the Fuel web UI and scroll down the page. Select the
-   Fuel plugin to enable SolidFire driver in Cinder plugin checkbox:
-7. Enter the Cluster Admin account information (account and password) and the IP address
+#. Download the plugin from
+   `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
+
+#. Copy the plugin to an already installed Fuel Master node. If you do not
+   have the Fuel Master node yet, follow the instructions from the
+   official Mirantis OpenStack documentation:
+
+   ::
+
+      scp  fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm root@:<the_Fuel_Master_node_IP>:/tmp
+
+#. Log into the Fuel Master node and install the plugin:
+
+   ::
+
+        cd /tmp
+        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm
+
+Solidfire Cinder plugin configuration
+-------------------------------------
+
+#. After plugin is installed, create a new OpenStack environment following
+   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#create-a-new-openstack-environment>`_.
+
+#. Configure your environment following
+   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#configure-your-environment>`_
+
+#. Open the *Settings tab* of the Fuel web UI and scroll down the page. Select the
+   Fuel plugin checkbox to enable SolidFire Cinder plugin for Fuel:
+
+      .. image:: figures/cinder-solidfire-plugin.png
+
+#. Enter the Cluster Admin account information (account and password) and the IP address
    of the Management Virtual IP (MVIP) of the SolidFire Cluster.
-7a. Select the defaults for all other SolidFire options.
+
+#. Select the defaults for all other SolidFire options.
+
+#. Once configuration is done, you can run
+   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#deploy-changes>`_.
+
 
 User Guide
 ==========
 
-Once the OpenStack instance is deployed by Fuel the SolidFire plugin provides no
+Once the OpenStack instance is deployed by Fuel, the SolidFire plugin provides no
 user configurable or maintainable options.
 
-The SolidFire driver (Once configured by Fuel) will output all logs into the
+The SolidFire driver (once configured by Fuel) will output all logs into the
 cinder-volume process log file with the 'SolidFire' title.
 
 Known issues
@@ -102,4 +125,5 @@ There are no known issues at this time.
 Appendix
 ========
 
-N/A
+`The SolidFire driver documentation <http://docs.openstack.org/juno/config-reference/content/solidfire-volume-driver.html>`_
+contains complete information on all SolidFire driver options.
