@@ -1,5 +1,5 @@
 ************************************************************
-Guide to the SolidFire Cinder Plugin version 1.0.0 for Fuel
+Guide to the SolidFire Cinder Plugin version 1.0.1 for Fuel
 ************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -50,6 +50,14 @@ Fuel                         6.1
 
 ============================================
 
+Prerequisites
+--------------
+
+* The SolidFire cluster should be configured and on the network prior to starting
+  Cinder with the SolidFire configuration in place.
+
+============================================
+
 Limitations
 -----------
 
@@ -58,7 +66,9 @@ Limitations
 
 * The SolidFire Cinder Fuel plugin does however provide the ability to
   create a configuarion file stanza such that when multi-backend support
-  is added to Fuel the stanza is correct.
+  is added to Fuel the stanza is correct. By selecting the checkbox (selected by default)
+  'Multibackend Enabled' the stanza is added and the enabled_backends line is added to 
+  the 'default' section of the configuration file.
 
 Installation Guide
 ==================
@@ -99,6 +109,9 @@ Solidfire Cinder plugin configuration
 
       .. image:: figures/cinder-solidfire-plugin.png
          :width: 100%
+
+#. If you would like the SolidFire configuration in the 'default' section of the configuation file
+   (not recommended) uncheck the 'Multibackend Enabled' box. 
 
 #. Enter the Cluster Admin account information (account and password) and the IP address
    of the Management Virtual IP (MVIP) of the SolidFire Cluster.
