@@ -1,5 +1,5 @@
 ************************************************************
-Guide to the SolidFire Cinder Plugin version 1.0.0 for Fuel
+Guide to the SolidFire Cinder Plugin version 1.0.1 for Fuel
 ************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -47,6 +47,14 @@ Requirements
 Requirement                 Version/Comment
 =======================   ==================
 Fuel                         6.1
+
+============================================
+
+Prerequisites
+--------------
+
+* The SolidFire cluster should be configured and on the network prior to starting
+  Cinder with the SolidFire configuration in place.
 
 ============================================
 
