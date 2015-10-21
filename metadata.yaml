@@ -1,21 +1,21 @@
 name: fuel-plugin-solidfire-cinder
 title: Fuel plugin to enable SolidFire driver in Cinder
-version: '1.0.1'
+version: '1.1.0'
 description: Enables the SolidFire driver in Cinder
-fuel_version: ['6.1']
+fuel_version: ['7.0']
 licenses: ['Apache License Version 2.0']
-authors: ['John Griffith <john.griffith@solidfire.com>', 'Ed Balduf <ed.balduf@solidfire.com>']
+authors: [ 'Ed Balduf <ed.balduf@solidfire.com>', 'John Griffith <john.griffith@solidfire.com>']
 homepage: 'https://github.com/stackforge/fuel-plugin-solidfire-cinder'
 groups: ['storage::cinder']
 
 releases:
   - os: ubuntu
-    version: 2014.2-6.1
+    version: 2015.1-7.0
     mode: ['ha', 'multinode']
     deployment_scripts_path: deployment_scripts/
     repository_path: repositories/ubuntu
   - os: centos
-    version: 2014.2-6.1
+    version: 2015.1-7.0
     mode: ['ha', 'multinode']
     deployment_scripts_path: deployment_scripts/
     repository_path: repositories/centos

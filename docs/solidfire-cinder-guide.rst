@@ -1,5 +1,5 @@
 ************************************************************
-Guide to the SolidFire Cinder Plugin version 1.0.1 for Fuel
+Guide to the SolidFire Cinder Plugin version 1.1.0 for Fuel
 ************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -46,7 +46,7 @@ Requirements
 =======================   ==================
 Requirement                 Version/Comment
 =======================   ==================
-Fuel                         6.1
+Fuel                         7.0
 
 ============================================
 
@@ -86,28 +86,30 @@ SolidFire Cinder plugin installation
 
    ::
 
-      scp  fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm root@:<the_Fuel_Master_node_IP>:/tmp
+      scp fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
 
    ::
 
         cd /tmp
-        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.0-1.0.1-1.noarch.rpm
+        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm
 
 Solidfire Cinder plugin configuration
 -------------------------------------
 
 #. After plugin is installed, create a new OpenStack environment following
-   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#create-a-new-openstack-environment>`_.
+   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#create-a-new-openstack-environment>`_.
 
 #. Configure your environment following
-   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#configure-your-environment>`_
+   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#configure-your-environment>`_
 
-#. Open the *Settings tab* of the Fuel web UI and scroll down the page. Select the
-   Fuel plugin checkbox to enable SolidFire Cinder plugin for Fuel:
+#. Open the *Settings tab* of the Fuel web UI and scroll down the page and select
+   'Fuel plugin to enable SolidFire driver in Cinder.' on the left
 
-      .. image:: figures/cinder-solidfire-plugin.png
+#. Select the Fuel plugin checkbox to enable SolidFire Cinder plugin for Fuel:
+
+      .. image:: figures/cinder-solidfire-plugin-1.1.0.png
          :width: 100%
 
 #. If you would like the SolidFire configuration in the 'default' section of the configuation file
@@ -119,7 +121,7 @@ Solidfire Cinder plugin configuration
 #. Select the defaults for all other SolidFire options.
 
 #. Once configuration is done, you can run
-   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-6.1/user-guide.html#deploy-changes>`_.
+   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#deploy-changes>`_.
 
 
 User Guide
@@ -134,10 +136,11 @@ cinder-volume process log file with the 'SolidFire' title.
 Known issues
 ============
 
-There are no known issues at this time.
+Due to Fuels lack of support for multiple cinder backends, only a single storage vendor backend may be automatically
+configure within Fuel at this time. If you need to support multiple vendors, hand editing of the cinder.conf is required.
 
 Appendix
 ========
 
-`The SolidFire driver documentation <http://docs.openstack.org/juno/config-reference/content/solidfire-volume-driver.html>`_
+`The SolidFire driver documentation <http://docs.openstack.org/kilo/config-reference/content/solidfire-volume-driver.html>`_
 contains complete information on all SolidFire driver options.
