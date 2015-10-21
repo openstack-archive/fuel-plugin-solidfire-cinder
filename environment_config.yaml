@@ -32,6 +32,18 @@ attributes:
     description: 'The TCP port to use for API communication with the cluster or proxy server.'
     weight: 50
     type: "text"
+  solidfire_allow_template_caching:
+    value: true
+    label: 'Enable Caching'
+    description: 'When creating bootable volumes, create an image cache on the SolidFire cluster.'
+    weight: 51
+    type: "checkbox"
+  solidfire_template_account:
+    value: 'openstack-vtemplate'
+    label: 'Template Account'
+    description: 'SolidFire account to use to hold the template cache.'
+    weight: 52
+    type: "text"
   solidfire_emulate_512:
     value: "true"
     values:
@@ -45,3 +57,9 @@ attributes:
     description: 'Enable/Disable 512 byte block size emulation (typically left enabled).'
     weight: 60
     type: "radio"
+  solidfire_account_prefix:
+    value: ''
+    label: 'SF account prefix'
+    description: 'Prefix to use for all SolidFire accounts related to this OpenStack.'
+    weight: 70
+    type: "text"
