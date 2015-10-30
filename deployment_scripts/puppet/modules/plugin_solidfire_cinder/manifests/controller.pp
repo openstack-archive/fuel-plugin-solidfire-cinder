@@ -40,14 +40,19 @@ class plugin_solidfire_cinder::controller (
     }
 
     cinder::backend::solidfire { $section :
-      san_ip                      => $plugin_settings['solidfire_mvip'],
-      san_login                   => $plugin_settings['solidfire_admin_login'],
-      san_password                => $plugin_settings['solidfire_admin_password'],
-      volume_backend_name         => $section,
-      sf_emulate_512              => $plugin_settings['solidfire_emulate_512'],
-      sf_api_port                 => $plugin_settings['solidfire_api_port'],
-      # due to a non-update of the puppet modules in version 6.1 of fuel we need to set this
-      volume_driver               => 'cinder.volume.drivers.solidfire.SolidFireDriver'
+      san_ip               => $plugin_settings['solidfire_mvip'],
+      san_login            => $plugin_settings['solidfire_admin_login'],
+      san_password         => $plugin_settings['solidfire_admin_password'],
+      volume_backend_name  => $section,
+      sf_emulate_512       => $plugin_settings['solidfire_emulate_512'],
+      sf_api_port          => $plugin_settings['solidfire_api_port'],
+      sf_account_prefix    => $plugin_settings['solidfire_account_prefix'],
+      extra_options        => { "$section/sf_allow_template_caching" =>
+               { value => $plugin_settings['solidfire_allow_template_caching'] },
+                                 "$section/sf_template_account_name" =>
+               { value => $plugin_settings['solidfire_template_account'] },
+                                 "$section/host" => { value => $section }
+                              },
     }
 
     Cinder_config<||>~> Service[cinder_volume]
