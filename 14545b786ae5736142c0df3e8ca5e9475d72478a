@@ -1,0 +1,8 @@
+Verified+2: Jenkins
+Code-Review+2: Edward Balduf <ed.balduf@solidfire.com>
+Workflow+1: Edward Balduf <ed.balduf@solidfire.com>
+Submitted-by: Jenkins
+Submitted-at: Tue, 10 Nov 2015 17:28:51 +0000
+Reviewed-on: https://review.openstack.org/243738
+Project: openstack/fuel-plugin-solidfire-cinder
+Branch: refs/heads/7.0
