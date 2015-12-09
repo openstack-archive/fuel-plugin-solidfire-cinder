@@ -64,5 +64,8 @@ class plugin_solidfire_cinder::controller (
       hasstatus  => true,
       hasrestart => true,
     }
+    package { 'open-iscsi' :
+      ensure => 'installed',
+    }
 
 }
