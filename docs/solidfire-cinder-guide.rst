@@ -1,5 +1,5 @@
 ************************************************************
-Guide to the SolidFire Cinder Plugin version 1.1.0 for Fuel
+Guide to the SolidFire Cinder Plugin version 1.1.1 for Fuel
 ************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -60,6 +60,10 @@ Prerequisites
 * The SolidFire cluster should be configured and on the network prior to starting
   Cinder with the SolidFire configuration in place.
 
+* Cinder relies on the open-iscsi package to preform many functions such as image
+  to volume. This plugin requires (and installs) the open-iscsi package, so it must
+  be avaliable in one of the repositories avaliable Fuel.
+
 ============================================
 
 Limitations
@@ -90,7 +94,7 @@ SolidFire Cinder plugin installation
 
    ::
 
-      scp fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm \
+      scp fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm \
           root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
@@ -98,7 +102,7 @@ SolidFire Cinder plugin installation
    ::
 
         cd /tmp
-        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm
+        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm
 
 SolidFire Cinder plugin configuration
 -------------------------------------
