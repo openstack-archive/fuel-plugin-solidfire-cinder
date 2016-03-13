@@ -8,7 +8,8 @@ attributes:
   solidfire_mvip:
     value: ''
     label: 'Cluster MVIP (san_ip)'
-    description: 'The hostname (or IP address) for the SolidFire Cluster API endpoint.'
+    description: 'The hostname (or IP address) for the SolidFire Cluster API \
+endpoint.'
     weight: 20
     type: "text"
   solidfire_admin_login:
@@ -29,13 +30,15 @@ attributes:
   solidfire_api_port:
     value: '443'
     label: 'Cluster endpoint port'
-    description: 'The TCP port to use for API communication with the cluster or proxy server.'
+    description: 'The TCP port to use for API communication with the cluster \
+or proxy server.'
     weight: 50
     type: "text"
   solidfire_allow_template_caching:
     value: true
     label: 'Enable Caching'
-    description: 'When creating bootable volumes, create an image cache on the SolidFire cluster.'
+    description: 'When creating bootable volumes, create an image cache on \
+the SolidFire cluster.'
     weight: 51
     type: "checkbox"
   solidfire_template_account:
@@ -49,17 +52,21 @@ attributes:
     values:
         - data: "true"
           label: "True"
-          description: "Enables 512 byte emulation on volumes during creation."
+          description: 'Enables 512 byte emulation on volumes during \
+creation.'
         - data: "false"
           label: "False"
-          description: "Disables 512 byte emulation and uses the native 4096 byte block size."
+          description: 'Disables 512 byte emulation and uses the native \
+4096 byte block size.'
     label: "SolidFire Emulate 512 block size"
-    description: 'Enable/Disable 512 byte block size emulation (typically left enabled).'
+    description: 'Enable/Disable 512 byte block size emulation (typically \
+left enabled).'
     weight: 60
     type: "radio"
   solidfire_account_prefix:
     value: ''
     label: 'SF account prefix'
-    description: 'Prefix to use for all SolidFire accounts related to this OpenStack.'
+    description: 'Prefix to use for all SolidFire accounts related to this \
+OpenStack.'
     weight: 70
     type: "text"

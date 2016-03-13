@@ -1,5 +1,5 @@
 ************************************************************
-Guide to the SolidFire Cinder Plugin version 1.1.1 for Fuel
+Guide to the SolidFire Cinder Plugin version 1.2.0 for Fuel
 ************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -11,6 +11,11 @@ Key terms, acronyms and abbreviations
 MVIP
     Management Virtual IP (MVIP) is the IP address (or hostname) of
     the management interface to the SolidFire cluster
+
+SVIP
+    Storage Virtual IP (SVIP) is the IP address (or hostname) of the
+    storage interface of the SolidFire cluster. SolidFire supports
+    multiple SVIPs on separate VLANs.
 
 Cluster Admin account
     The Cluster Admin account on a SolidFire cluster is the account by
@@ -50,7 +55,7 @@ Requirements
 =======================   ==================
 Requirement                 Version/Comment
 =======================   ==================
-Fuel                         7.0
+Fuel                         7.0, 8.0
 
 ============================================
 
@@ -87,6 +92,18 @@ SolidFire Cinder plugin installation
 
 #. Download the plugin from
    `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
+   or clone this repository, install the fuel plugin builder with the
+   following command
+
+   ::
+
+     pip install fuel-plugin-builder
+
+   and then build the plugin using the following command:
+
+   ::
+
+     cd fuel-plugin-solidfire-cinder; fpb --build ./
 
 #. Copy the plugin to an already installed Fuel Master node. If you do not
    have the Fuel Master node yet, follow the instructions from the
@@ -94,7 +111,7 @@ SolidFire Cinder plugin installation
 
    ::
 
-      scp fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm \
+      scp fuel-plugin-solidfire-cinder-1.2-1.2.0-1.noarch.rpm \
           root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
@@ -102,16 +119,16 @@ SolidFire Cinder plugin installation
    ::
 
         cd /tmp
-        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm
+        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.2-1.2.0-1.noarch.rpm
 
 SolidFire Cinder plugin configuration
 -------------------------------------
 
 #. After plugin is installed, create a new OpenStack environment following
-   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#create-a-new-openstack-environment>`_.
+   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#create-a-new-openstack-environment>`_.
 
 #. Configure your environment following
-   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#configure-your-environment>`_.
+   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#configure-your-environment>`_.
 
 #. Open the *Settings tab* of the Fuel web UI and scroll down the page and select
    'Fuel plugin to enable SolidFire driver in Cinder.' on the left.
@@ -154,7 +171,7 @@ SolidFire Cinder plugin configuration
    on SolidFire are named using the Project/Tenant ID, optionally prefixed as defined here.
 
 #. Once configuration is done, you can run
-   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#deploy-changes>`_.
+   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#deploy-changes>`_.
 
 
 User Guide

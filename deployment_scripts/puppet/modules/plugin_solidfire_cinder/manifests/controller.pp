@@ -33,7 +33,7 @@ class plugin_solidfire_cinder::controller (
     if $plugin_settings['multibackend'] {
       $section = $backend_name
       cinder_config {
-        "DEFAULT/enabled_backends": value => "${backend_name},${backends}";
+        'DEFAULT/enabled_backends': value => "${backend_name},${backends}";
       }
     } else {
       $section = 'DEFAULT'
@@ -47,11 +47,12 @@ class plugin_solidfire_cinder::controller (
       sf_emulate_512       => $plugin_settings['solidfire_emulate_512'],
       sf_api_port          => $plugin_settings['solidfire_api_port'],
       sf_account_prefix    => $plugin_settings['solidfire_account_prefix'],
-      extra_options        => { "$section/sf_allow_template_caching" =>
-               { value => $plugin_settings['solidfire_allow_template_caching'] },
-                                 "$section/sf_template_account_name" =>
-               { value => $plugin_settings['solidfire_template_account'] },
-                                 "$section/host" => { value => $section }
+      extra_options        => { "${section}/sf_allow_template_caching"  =>
+          { value => $plugin_settings['solidfire_allow_template_caching'] },
+                                  "${section}/sf_template_account_name" =>
+                { value => $plugin_settings['solidfire_template_account'] },
+                                                      "${section}/host" =>
+                                                      { value => $section },
                               },
     }
 
