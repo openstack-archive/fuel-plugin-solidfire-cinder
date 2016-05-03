@@ -1,6 +1,6 @@
-************************************************************
-Guide to the SolidFire Cinder Plugin version 1.1.1 for Fuel
-************************************************************
+******************************************************************
+Guide to the SolidFire Cinder Plugin version 01.001.1 for Fuel 7.x
+******************************************************************
 
 This document provides instructions for installing, configuring and using
 SolidFire Cinder plugin for Fuel.
@@ -64,7 +64,7 @@ Prerequisites
   to volume. This plugin requires (and installs) the open-iscsi package, so it must
   be avaliable in one of the repositories avaliable Fuel.
 
-============================================
+* See the `Mirantis, SolidFire joint reference architecture <https://content.mirantis.com/rs/451-RBY-185/images/SolidfireMirantisUnlockedReferenceArchitecture-4-25-2016.pdf>`_.
 
 Limitations
 -----------
@@ -77,6 +77,8 @@ Limitations
   is added to Fuel the stanza is correct. By selecting the checkbox (selected by default)
   'Multibackend Enabled' the stanza is added and the enabled_backends line is added to
   the 'default' section of the configuration file.
+
+============================================
 
 Installation Guide
 ==================
@@ -94,15 +96,72 @@ SolidFire Cinder plugin installation
 
    ::
 
-      scp fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm \
+      # scp fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm \
           root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
 
    ::
 
-        cd /tmp
-        fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm
+        # cd /tmp
+        # fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm
+        DEPRECATION WARNING: /etc/fuel/client/config.yaml exists and will be used as the source for settings. This behavior is deprecated. Please specify
+        the path to your custom settings file in the FUELCLIENT_CUSTOM_SETTINGS environment variable.
+        Loaded plugins: fastestmirror, priorities
+        Setting up Install Process
+        Examining /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm:
+        fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
+        Marking /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm to be
+        installed
+        Loading mirror speeds from cached hostfile
+        7.0_auxiliary
+        | 2.9 kB     00:00 ...
+        mos7.0-security
+        | 2.9 kB     00:00
+        mos7.0-security/primary_db
+        | 1.1 kB     00:00
+        mos7.0-updates
+        | 2.9 kB     00:00
+        mos7.0-updates/primary_db
+        | 1.1 kB     00:00
+        nailgun
+        | 3.9 kB     00:00 ...
+        Resolving Dependencies
+        --> Running transaction check
+        ---> Package fuel-plugin-solidfire-cinder-1.1.noarch 0:1.1.0-1 will be
+        installed
+        --> Finished Dependency Resolution
+
+        Dependencies Resolved
+
+        ========================================================================================================================================================================================
+         Package                                              Arch
+        Version                     Repository
+        Size
+        ========================================================================================================================================================================================
+        Installing:
+         fuel-plugin-solidfire-cinder-1.1                     noarch
+        1.1.0-1                     /fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
+        202 k
+
+        Transaction Summary
+        ========================================================================================================================================================================================
+        Install       1 Package(s)
+
+        Total size: 202 k
+        Installed size: 202 k
+        Downloading Packages:
+        Running rpm_check_debug
+        Running Transaction Test
+        Transaction Test Succeeded
+        Running Transaction
+          Installing : fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
+        1/1
+          Verifying  : fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
+        1/1
+
+        Installed:
+          fuel-plugin-solidfire-cinder-1.1.noarch 0:1.1.0-1
 
 SolidFire Cinder plugin configuration
 -------------------------------------
@@ -164,13 +223,29 @@ Once the OpenStack instance is deployed by Fuel, the SolidFire plugin provides n
 user configurable or maintainable options.
 
 The SolidFire driver (once configured by Fuel) will output all logs into the
-cinder-volume process log file with the 'SolidFire' title.
+cinder-volume process log file with the 'solidfire' title.
 
 Known issues
 ============
 
 Due to Fuels lack of support for multiple cinder backends, only a single storage vendor backend may be automatically
 configure within Fuel at this time. If you need to support multiple vendors, hand editing of the cinder.conf is required.
+
+Release Notes
+=============
+
+* Version 1.0.1 supports Fuel 6.x.
+
+* Version 1.1.0 supports Fuel 7.x.
+
+* Version 01.001.1 adds automated install of the open-iscsi package which is required by SolidFire, but not installed
+  by Fuel if Ceph is selected in the starting wizzard. Supports Fuel 7.x.
+
+
+Troubleshooting
+===============
+
+All SolidFire messages are output into the Cinder-volume log file. Search for 'solidfire'.
 
 Appendix
 ========
