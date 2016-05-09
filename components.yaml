@@ -1,0 +1,7 @@
+- name: 'storage:block:backend:solidfire'
+  label: 'Cinder SolidFire'
+  description: 'Cinder with SolidFire backend'
+  compatible:
+    - name: 'storage:block:backend:ceph'
+    - name: 'storage:block:backend:lvm'
+    - name: 'storage:block:backend:netapp'
