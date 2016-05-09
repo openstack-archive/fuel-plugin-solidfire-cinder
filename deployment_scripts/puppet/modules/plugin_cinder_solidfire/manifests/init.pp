@@ -13,4 +13,4 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-class plugin__solidfire_cinder {}
+class plugin_cinder_solidfire {}

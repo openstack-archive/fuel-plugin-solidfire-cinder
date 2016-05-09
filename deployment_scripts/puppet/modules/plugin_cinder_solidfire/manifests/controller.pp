@@ -13,7 +13,7 @@
 #    under the License.
 #
 
-class plugin_solidfire_cinder::controller (
+class plugin_cinder_solidfire::controller (
     $backend_name  = 'solidfire',
     $backends      = ''
 ) {
@@ -21,7 +21,7 @@ class plugin_solidfire_cinder::controller (
     include cinder::params
     include cinder::client
 
-    $plugin_settings = hiera('fuel-plugin-solidfire-cinder')
+    $cinder_solidfire = hiera_hash('cinder_solidfire', {})
 
     if $::cinder::params::volume_package {
       package { $::cinder::params::volume_package:
@@ -30,28 +30,25 @@ class plugin_solidfire_cinder::controller (
       Package[$::cinder::params::volume_package] -> Cinder_config<||>
     }
 
-    if $plugin_settings['multibackend'] {
-      $section = $backend_name
-      cinder_config {
-        "DEFAULT/enabled_backends": value => "${backend_name},${backends}";
-      }
-    } else {
-      $section = 'DEFAULT'
+    $section = $backend_name
+    cinder_config {
+      "DEFAULT/enabled_backends": value => "${backend_name},${backends}";
     }
 
-    cinder::backend::solidfire { $section :
-      san_ip               => $plugin_settings['solidfire_mvip'],
-      san_login            => $plugin_settings['solidfire_admin_login'],
-      san_password         => $plugin_settings['solidfire_admin_password'],
-      volume_backend_name  => $section,
-      sf_emulate_512       => $plugin_settings['solidfire_emulate_512'],
-      sf_api_port          => $plugin_settings['solidfire_api_port'],
-      sf_account_prefix    => $plugin_settings['solidfire_account_prefix'],
-      extra_options        => { "$section/sf_allow_template_caching" =>
-               { value => $plugin_settings['solidfire_allow_template_caching'] },
-                                 "$section/sf_template_account_name" =>
-               { value => $plugin_settings['solidfire_template_account'] },
-                                 "$section/host" => { value => $section }
+    cinder::backend::solidfire { $backend_name :
+      san_ip               => $cinder_solidfire['solidfire_mvip'],
+      san_login            => $cinder_solidfire['solidfire_admin_login'],
+      san_password         => $cinder_solidfire['solidfire_admin_password'],
+      volume_backend_name  => $backend_name,
+      sf_emulate_512       => $cinder_solidfire['solidfire_emulate_512'],
+      sf_api_port          => $cinder_solidfire['solidfire_api_port'],
+      sf_account_prefix    => $cinder_solidfire['solidfire_account_prefix'],
+      extra_options        => { "${backend_name}/sf_allow_template_caching"  =>
+          { value => $cinder_solidfire['solidfire_allow_template_caching'] },
+                                  "${backend_name}/sf_template_account_name" =>
+                { value => $cinder_solidfire['solidfire_template_account'] },
+                                                      "${backend_name}/host" =>
+                                                      { value => $backend_name },
                               },
     }
 
@@ -64,6 +61,7 @@ class plugin_solidfire_cinder::controller (
       hasstatus  => true,
       hasrestart => true,
     }
+
     package { 'open-iscsi' :
       ensure => 'installed',
     }
