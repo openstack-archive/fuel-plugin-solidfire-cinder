@@ -105,63 +105,11 @@ SolidFire Cinder plugin installation
 
         # cd /tmp
         # fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm
-        DEPRECATION WARNING: /etc/fuel/client/config.yaml exists and will be used as the source for settings. This behavior is deprecated. Please specify
-        the path to your custom settings file in the FUELCLIENT_CUSTOM_SETTINGS environment variable.
-        Loaded plugins: fastestmirror, priorities
-        Setting up Install Process
-        Examining /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm:
-        fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
-        Marking /tmp/fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch.rpm to be
-        installed
-        Loading mirror speeds from cached hostfile
-        7.0_auxiliary
-        | 2.9 kB     00:00 ...
-        mos7.0-security
-        | 2.9 kB     00:00
-        mos7.0-security/primary_db
-        | 1.1 kB     00:00
-        mos7.0-updates
-        | 2.9 kB     00:00
-        mos7.0-updates/primary_db
-        | 1.1 kB     00:00
-        nailgun
-        | 3.9 kB     00:00 ...
-        Resolving Dependencies
-        --> Running transaction check
-        ---> Package fuel-plugin-solidfire-cinder-1.1.noarch 0:1.1.0-1 will be
-        installed
-        --> Finished Dependency Resolution
-
-        Dependencies Resolved
-
-        ========================================================================================================================================================================================
-         Package                                              Arch
-        Version                     Repository
-        Size
-        ========================================================================================================================================================================================
-        Installing:
-         fuel-plugin-solidfire-cinder-1.1                     noarch
-        1.1.0-1                     /fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
-        202 k
-
-        Transaction Summary
-        ========================================================================================================================================================================================
-        Install       1 Package(s)
-
-        Total size: 202 k
-        Installed size: 202 k
-        Downloading Packages:
-        Running rpm_check_debug
-        Running Transaction Test
-        Transaction Test Succeeded
-        Running Transaction
-          Installing : fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
-        1/1
-          Verifying  : fuel-plugin-solidfire-cinder-1.1-1.1.0-1.noarch
-        1/1
-
-        Installed:
-          fuel-plugin-solidfire-cinder-1.1.noarch 0:1.1.0-1
+        ...
+        # fuel plugins list
+        id | name                         | version | package_version
+        ---|------------------------------|---------|----------------
+        1  | fuel-plugin-solidfire-cinder | 1.1.1   | 2.0.0
 
 SolidFire Cinder plugin configuration
 -------------------------------------
