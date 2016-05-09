@@ -1,0 +1,4 @@
+- name: 'storage:block:backend:solidfire'
+  label: 'Cinder SolidFire'
+  description: 'Cinder with SolidFire backend'
+  compatible: []

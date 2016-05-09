@@ -14,4 +14,6 @@
 #    under the License.
 #
 
-include plugin_solidfire_cinder::controller
+notice('MODULAR: fuel-plugin-cinder-solidfire')
+
+class { 'plugin_cinder_solidfire::controller': }

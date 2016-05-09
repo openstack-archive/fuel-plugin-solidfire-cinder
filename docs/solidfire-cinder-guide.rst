@@ -1,5 +1,5 @@
 ******************************************************************
-Guide to the SolidFire Cinder Plugin version 01.001.1 for Fuel 7.x
+Guide to the SolidFire Cinder Plugin version 02.000.0 for Fuel 7.x
 ******************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -11,6 +11,11 @@ Key terms, acronyms and abbreviations
 MVIP
     Management Virtual IP (MVIP) is the IP address (or hostname) of
     the management interface to the SolidFire cluster
+
+SVIP
+    Storage Virtual IP (SVIP) is the IP address (or hostname) of the
+    storage interface of the SolidFire cluster. SolidFire supports
+    multiple SVIPs on separate VLANs.
 
 Cluster Admin account
     The Cluster Admin account on a SolidFire cluster is the account by
@@ -50,7 +55,7 @@ Requirements
 =======================   ==================
 Requirement                 Version/Comment
 =======================   ==================
-Fuel                         7.0
+Fuel                         7.0, 8.0
 
 ============================================
 
@@ -89,6 +94,18 @@ SolidFire Cinder plugin installation
 
 #. Download the plugin from
    `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
+   or clone this repository, install the fuel plugin builder with the
+   following command
+
+   ::
+
+     pip install fuel-plugin-builder
+
+   and then build the plugin using the following command:
+
+   ::
+
+     cd fuel-plugin-solidfire-cinder; fpb --build ./
 
 #. Copy the plugin to an already installed Fuel Master node. If you do not
    have the Fuel Master node yet, follow the instructions from the
@@ -96,7 +113,7 @@ SolidFire Cinder plugin installation
 
    ::
 
-      # scp fuel-plugin-solidfire-cinder-1.1-1.1.1-1.noarch.rpm \
+      # scp fuel-plugin-solidfire-cinder-2.0-2.0.0-1.noarch.rpm \
           root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
@@ -109,16 +126,16 @@ SolidFire Cinder plugin installation
         # fuel plugins list
         id | name                         | version | package_version
         ---|------------------------------|---------|----------------
-        1  | fuel-plugin-solidfire-cinder | 1.1.1   | 2.0.0
+        1  | fuel-plugin-solidfire-cinder | 2.0.0   | 4.0.0
 
 SolidFire Cinder plugin configuration
 -------------------------------------
 
 #. After plugin is installed, create a new OpenStack environment following
-   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#create-a-new-openstack-environment>`_.
+   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#create-a-new-openstack-environment>`_.
 
 #. Configure your environment following
-   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#configure-your-environment>`_.
+   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#configure-your-environment>`_.
 
 #. Open the *Settings tab* of the Fuel web UI and scroll down the page and select
    'Fuel plugin to enable SolidFire driver in Cinder.' on the left.
@@ -161,7 +178,7 @@ SolidFire Cinder plugin configuration
    on SolidFire are named using the Project/Tenant ID, optionally prefixed as defined here.
 
 #. Once configuration is done, you can run
-   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-7.0/user-guide.html#deploy-changes>`_.
+   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#deploy-changes>`_.
 
 
 User Guide
@@ -188,6 +205,8 @@ Release Notes
 
 * Version 01.001.1 adds automated install of the open-iscsi package which is required by SolidFire, but not installed
   by Fuel if Ceph is selected in the starting wizzard. Supports Fuel 7.x.
+
+* Version 02.00.0 refactors the code to support Fuel 8.0
 
 
 Troubleshooting
