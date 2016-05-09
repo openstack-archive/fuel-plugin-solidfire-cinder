@@ -1,0 +1,21 @@
+- id: solidfire_hiera_override
+  type: puppet
+  version: 2.0.0
+  groups: [primary-controller, controller, cinder]
+  requires: [hiera]
+  required_for: [create-cinder-types]
+  parameters:
+    puppet_manifest: puppet/manifests/hiera_override.pp
+    puppet_modules:  /etc/puppet/modules
+    timeout: 360
+
+- id: solidfire_cinder
+  type: puppet
+  version: 2.0.0
+  role: [primary-controller, controller, cinder]
+  requires: [post_deployment_start]
+  required_for: [post_deployment_end]
+  parameters:
+    puppet_manifest: puppet/manifests/site.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 360
