@@ -1,6 +1,6 @@
-******************************************************************
-Guide to the SolidFire Cinder Plugin version 01.001.1 for Fuel 7.x
-******************************************************************
+**********************************************************************
+Guide to the SolidFire Cinder Plugin version 1.1-1.1.1-1 for Fuel 7.0
+**********************************************************************
 
 This document provides instructions for installing, configuring and using
 SolidFire Cinder plugin for Fuel.
