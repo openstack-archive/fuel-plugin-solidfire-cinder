@@ -1,0 +1,9 @@
+Code-Review+1: Andrey Volochay <avolochay@mirantis.com>
+Code-Review+2: Edward Balduf <ed.balduf@solidfire.com>
+Workflow+1: Edward Balduf <ed.balduf@solidfire.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 24 Jun 2016 13:51:37 +0000
+Reviewed-on: https://review.openstack.org/326486
+Project: openstack/fuel-plugin-solidfire-cinder
+Branch: refs/heads/master
