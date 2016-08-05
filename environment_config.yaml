@@ -46,3 +46,9 @@ attributes:
     description: 'Prefix to use for all SolidFire accounts related to this OpenStack.'
     weight: 70
     type: "text"
+  solidfire_volume_prefix:
+    value: 'UUID-'
+    label: 'SF volume prefix'
+    description: 'Prefix to use for all SolidFire volumes related to this OpenStaack Cloud.'
+    weight: 80
+    type: 'text'

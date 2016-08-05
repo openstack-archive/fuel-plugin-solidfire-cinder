@@ -12,7 +12,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 #
-define plugin_cinder_solidfire::backend::solidfire (
+define plugin_cinder_solidfire::solidfire (
   $backend_name        = $name,
   $cinder_solidfire    = $plugin_cinder_solidfire::cinder_solidfire,
 ) {
@@ -20,17 +20,7 @@ define plugin_cinder_solidfire::backend::solidfire (
     include cinder::params
     include cinder::client
 
-    ini_subsetting {'enable_cinder_solidfire_backend':
-      ensure             => present,
-      section            => 'DEFAULT',
-      key_val_separator  => '=',
-      path               => '/etc/cinder/cinder.conf',
-      setting            => 'enabled_backends',
-      subsetting         => "${backend_name}",
-      subsetting_separator => ',',
-    }
-
-    notice("${backend_name}")
+    Cinder::Backend::Solidfire <||> -> Plugin_cinder_solidfire::Enable_backend[$backend_name] ~> Service <||>
 
     cinder::backend::solidfire { $backend_name :
       san_ip               => $cinder_solidfire['solidfire_mvip'],
@@ -40,19 +30,20 @@ define plugin_cinder_solidfire::backend::solidfire (
       sf_emulate_512       => 'true',
       sf_api_port          => $cinder_solidfire['solidfire_api_port'],
       sf_account_prefix    => $cinder_solidfire['solidfire_account_prefix'],
-      extra_options        => { "${backend_name}/sf_allow_template_caching"  =>
-          { value => $cinder_solidfire['solidfire_allow_template_caching'] },
-                                  "${backend_name}/sf_template_account_name" =>
-                { value => $cinder_solidfire['solidfire_template_account'] },
-                                                      "${backend_name}/host" =>
-                                                      { value => $backend_name },
+      sf_allow_template_caching  => $cinder_solidfire['solidfire_allow_template_caching'],
+      sf_template_account_name  => $cinder_solidfire['solidfire_template_account'],
+      sf_volume_prefix    => $cinder_solidfire['solidfire_volume_prefix'],
+      extra_options        => { "${backend_name}/host" =>
+                                                   { value => $backend_name },
                               },
     }
 
-    Cinder_config <||> ~> service { "$::cinder::params::scheduler_service": } ~> service { "$::cinder::params::volume_service": }
+    plugin_cinder_solidfire::enable_backend { $backend_name: }
 
     package { 'open-iscsi' :
       ensure => 'installed',
     }
+
+    service { $cinder::params::volume_service: }
 
 }

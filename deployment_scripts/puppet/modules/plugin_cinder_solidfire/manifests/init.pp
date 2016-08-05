@@ -15,27 +15,7 @@
 #
 class plugin_cinder_solidfire {
 
-  $cinder_solidfire = hiera_hash('cinder_solidfire', {})
-  $storage_hash  = hiera_hash('storage_hash', {})
-  $plugins = hiera('plugins', [] )
-
-  if ($storage_hash['volume_backend_names']['volumes_lvm']) {
-    $backend_type        = $storage_hash['volume_backend_names']['volumes_lvm']
-    $backend_name        = 'cinder_iscsi'
-    $volume_backend_name = 'volumes_lvm'
-    $backend_class       = 'plugin_cinder_solidfire::backend::iscsi'
-  } elsif ($storage_hash['volume_backend_names']['volumes_ceph']) {
-    $backend_type        = $storage_hash['volume_backend_names']['volumes_ceph']
-    $backend_name        = 'cinder_rbd'
-    $volume_backend_name = 'volumes_ceph'
-    $backend_class       = 'plugin_cinder_solidfire::backend::rbd'
-  }
-
-  if ( 'cinder_netapp' in $plugins ) {
-    plugin_cinder_solidfire::backend::solidfire { 'solidfire': backend_name => 'solidfire', }
-  } else {
-    class { $backend_class: backend_type => $backend_type, } 
-    plugin_cinder_solidfire::backend::solidfire { 'solidfire': backend_name => 'solidfire', }
-  }
+    $cinder_solidfire = hiera_hash('cinder_solidfire', {})
+    plugin_cinder_solidfire::solidfire { 'solidfire': backend_name => 'solidfire', }
 
 }

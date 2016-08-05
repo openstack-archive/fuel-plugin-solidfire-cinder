@@ -1,6 +1,6 @@
-******************************************************************
-Guide to the SolidFire Cinder Plugin version 02.000.0 for Fuel 8.x
-******************************************************************
+***************************************************************
+Guide to the SolidFire Cinder Plugin version 3.0.0 for Fuel 9.x
+***************************************************************
 
 This document provides instructions for installing, configuring and using
 SolidFire Cinder plugin for Fuel.
@@ -55,7 +55,7 @@ Requirements
 =======================   ==================
 Requirement                 Version/Comment
 =======================   ==================
-Fuel                              8.0
+Fuel                              9.0
 
 ============================================
 
@@ -67,33 +67,16 @@ Prerequisites
 
 * Cinder relies on the open-iscsi package to preform many functions such as image
   to volume. This plugin requires (and installs) the open-iscsi package, so it must
-  be avaliable in one of the repositories avaliable Fuel.
+  be avaliable in one of the repositories avaliable to Fuel.
 
 * See the `Mirantis, SolidFire joint reference architecture <https://content.mirantis.com/rs/451-RBY-185/images/SolidfireMirantisUnlockedReferenceArchitecture-4-25-2016.pdf>`_.
 
 Limitations
 -----------
 
-* The SolidFire Cinder Fuel plugin no longer supports a single backend. The
-  option has been removed from the GUI and the plugin will always assume
-  multiple backends.
-
-* Since Fuel does not natively support multiple backends in Cinder; therefore,
-  the plugin is designed to move the default storage selection (ceph or lvm)
-  from the default section of the config file into it's own stanza before it
-  can add the SolidFire config stanza. 
-
-* The SolidFire Cinder plugin has been designed to detect the NetApp plugin
-  and handle multiple backends in conjunction with NetApp correctly.
-
-* All other storage plugins (other than NetApp) may conflict with the
-  SolidFire or NetApp plugin and whichever plugin runs last will configure the
-  enabled_backends, requiring hand editing.
-
-* NOTE: When using this plugin with the NetApp plugin one MUST select
-  'Multibackend Enabled' on NetApp plugin for proper multi-backend
-  to be automatically enabled.
-  
+* The SolidFire Cinder Fuel plugin no longer supports a single backend in the
+  DEFAULT section. The option has been removed from the GUI for multiple
+  backends and the plugin will always assume multiple backends.
 
 ============================================
 
@@ -125,7 +108,7 @@ SolidFire Cinder plugin installation
 
    ::
 
-      # scp fuel-plugin-solidfire-cinder-2.0-2.0.0-1.noarch.rpm \
+      # scp cinder_solidfire-3.0-3.0.0-1.noarch.rpm \
           root@:<the_Fuel_Master_node_IP>:/tmp
 
 #. Log into the Fuel Master node and install the plugin:
@@ -133,28 +116,28 @@ SolidFire Cinder plugin installation
    ::
 
         # cd /tmp
-        # fuel plugins --install /tmp/fuel-plugin-solidfire-cinder-2.0-2.0.0-1.noarch.rpm
+        # fuel plugins --install /tmp/cinder_solidfire-3.0-3.0.0-1.noarch.rpm
         ...
         # fuel plugins list
-        id | name                         | version | package_version
-        ---|------------------------------|---------|----------------
-        1  | fuel-plugin-solidfire-cinder | 2.0.0   | 4.0.0
+        id | name             | version | package_version | releases
+        ---+------------------+---------+-----------------+--------------------
+        1  | cinder_netapp    | 5.0.0   | 4.0.0           | ubuntu (mitaka-9.0)
 
 SolidFire Cinder plugin configuration
 -------------------------------------
 
 #. After plugin is installed, create a new OpenStack environment following
-   `the instructions <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#create-a-new-openstack-environment>`_.
+   `the instructions <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/create-environment/start-create-env.html>`_.
 
 #. Configure your environment following
-   `the official Mirantis OpenStack documentation <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#configure-your-environment>`_.
+   `the official OpenStack documentation <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/configure-environment.html>`_.
 
 #. Open the *Storage tab* of the Fuel web UI and scroll down the page to
-   'Fuel plugin to enable SolidFire in Cinder.'
+   'Fuel plugin for SolidFire in Cinder.'
 
 #. Select the Fuel plugin checkbox to enable SolidFire Cinder plugin for Fuel:
 
-      .. image:: figures/cinder-solidfire-plugin-2.0.0.png
+      .. image:: figures/cinder-solidfire-plugin-3.0.0.png
          :width: 100%
 
 #. The default configuration is that the SolidFire configuration stanza is a self contained stanza
@@ -181,9 +164,13 @@ SolidFire Cinder plugin configuration
    such that each instance can quickly identify accounts that belong to that instance. NOTE: Accounts
    on SolidFire are named using the Project/Tenant ID, optionally prefixed as defined here.
 
-#. Once configuration is done, you can run
-   `network verification <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#verify-networks>`_ check and `deploy the environment <https://docs.mirantis.com/openstack/fuel/fuel-8.0/user-guide.html#deploy-changes>`_.
+#. 'SF volume prefix' will cause all volumes on teh SolidFire cluster to be prefixed with with the
+   configured characters. This is useful and recommended when multiple OpenStack instances are
+   utilizing the same SolidFire cluster.  This field is pre-populated with the default value of 'UUID-'.
 
+#. Once configuration is done, you can run
+   `network verification <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/configure-environment/verify-networks.html>`_
+   check and `deploy the environment <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-user-guide/deploy-environment.html>`_.
 
 User Guide
 ==========
@@ -197,11 +184,10 @@ cinder-volume process log file with the 'solidfire' title.
 Known issues
 ============
 
-Due to Fuels lack of support for multiple cinder backends, only plugins 
-designed to reconfigure the base storage and detect other backend plugins
-will work automatically.  The SolidFire plugin will reconfigure the default
-storage and detect the NetApp plugin. If you need to support other vendors,
-hand editing of the cinder.conf is required.
+For Mitaka (Fuel 9.0) the following change is required to be in place
+https://review.openstack.org/#/c/347066/ in file
+/etc/puppet/mitaka-9.0/modules/cinder/manifests/backend/solidfire.pp on the
+fuel master.
 
 Release Notes
 =============
@@ -210,10 +196,12 @@ Release Notes
 
 * Version 1.1.0 supports Fuel 7.x.
 
-* Version 01.001.1 adds automated install of the open-iscsi package which is required by SolidFire, but not installed
+* Version 1.1.1 adds automated install of the open-iscsi package which is required by SolidFire, but not installed
   by Fuel if Ceph is selected in the starting wizzard. Supports Fuel 7.x.
 
-* Version 02.00.0 refactors the code to support Fuel 8.0
+* Version 2.0.0 refactors the code to support Fuel 8.0
+
+* Version 3.0.0 refactors the code to support Fuel 9.0
 
 
 Troubleshooting
@@ -224,5 +212,6 @@ All SolidFire messages are output into the Cinder-volume log file. Search for 's
 Appendix
 ========
 
-`The SolidFire driver documentation <http://docs.openstack.org/kilo/config-reference/content/solidfire-volume-driver.html>`_
+`The SolidFire driver documentation
+<http://docs.openstack.org/mitaka/config-reference/block-storage/drivers/solidfire-volume-driver.html>`_
 contains complete information on all SolidFire driver options.

@@ -1,8 +1,8 @@
 name: cinder_solidfire
 title: Fuel plugin for SolidFire in Cinder
-version: '2.0.0'
+version: '3.0.0'
 description: Enables the SolidFire driver in Cinder
-fuel_version: ['8.0']
+fuel_version: ['9.0']
 licenses: ['Apache License Version 2.0']
 authors: ['Ed Balduf <ed.balduf@solidfire.com>']
 homepage: 'https://github.com/stackforge/fuel-plugin-solidfire-cinder'
@@ -12,7 +12,7 @@ is_hotpluggable: true
 
 releases:
   - os: ubuntu
-    version: liberty-8.0
+    version: mitaka-9.0
     mode: ['ha']
     deployment_scripts_path: deployment_scripts/
     repository_path: repositories/ubuntu
