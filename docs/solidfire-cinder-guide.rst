@@ -67,7 +67,7 @@ Prerequisites
 
 * Cinder relies on the open-iscsi package to preform many functions such as image
   to volume. This plugin requires (and installs) the open-iscsi package, so it must
-  be avaliable in one of the repositories avaliable to Fuel.
+  be available in one of the repositories avaliable to Fuel.
 
 * See the `Mirantis, SolidFire joint reference architecture <https://content.mirantis.com/rs/451-RBY-185/images/SolidfireMirantisUnlockedReferenceArchitecture-4-25-2016.pdf>`_.
 
